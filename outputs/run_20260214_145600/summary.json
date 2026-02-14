@@ -1,0 +1,26 @@
+{
+  "joins": [
+    {
+      "left": "customers",
+      "right": "orders",
+      "key": "customer_id",
+      "coverage_left_to_right": 66.67,
+      "coverage_right_to_left": 100.0,
+      "left_unique": true,
+      "right_unique": false,
+      "score": 93.33
+    }
+  ],
+  "star_schema": {
+    "fact_table": "orders",
+    "dimensions": [
+      {
+        "table": "customers",
+        "key": "customer_id",
+        "coverage": 100.0
+      }
+    ],
+    "grain": "1 row per order_id"
+  },
+  "duckdb_model": "outputs/run_20260214_145600/model.duckdb"
+}

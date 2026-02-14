@@ -1,0 +1,83 @@
+{
+  "tables": {
+    "customers": {
+      "name": "customers",
+      "rows": 3,
+      "cols": 3,
+      "dtypes": {
+        "customer_id": "Int64",
+        "name": "String",
+        "city": "String"
+      },
+      "null_pct": {
+        "customer_id": 0.0,
+        "name": 0.0,
+        "city": 33.33333333333333
+      },
+      "unique_pct": {
+        "customer_id": 100.0,
+        "name": 100.0,
+        "city": 100.0
+      }
+    },
+    "orders": {
+      "name": "orders",
+      "rows": 3,
+      "cols": 3,
+      "dtypes": {
+        "order_id": "Int64",
+        "customer_id": "Int64",
+        "amount": "Int64"
+      },
+      "null_pct": {
+        "order_id": 0.0,
+        "customer_id": 0.0,
+        "amount": 33.33333333333333
+      },
+      "unique_pct": {
+        "order_id": 100.0,
+        "customer_id": 66.66666666666666,
+        "amount": 100.0
+      }
+    }
+  },
+  "joins": [
+    {
+      "left": "customers",
+      "right": "orders",
+      "key": "customer_id",
+      "coverage_left_to_right": 66.67,
+      "coverage_right_to_left": 100.0,
+      "left_unique": true,
+      "right_unique": false,
+      "score": 93.33
+    }
+  ],
+  "star_schema": {
+    "fact_table": "orders",
+    "dimensions": [
+      {
+        "table": "customers",
+        "key": "customer_id",
+        "coverage": 100.0
+      }
+    ],
+    "grain": "1 row per order_id",
+    "fact_dim_scores": [
+      {
+        "table": "orders",
+        "fact_score": 3,
+        "dim_score": 0,
+        "delta": 3,
+        "rows": 3
+      },
+      {
+        "table": "customers",
+        "fact_score": 0,
+        "dim_score": 6,
+        "delta": -6,
+        "rows": 3
+      }
+    ]
+  }
+}
